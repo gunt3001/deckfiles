@@ -23,6 +23,8 @@ done
 # Display the Zenity dialog and capture the selection
 selected_script=$(zenity --list --radiolist \
                           --title="Select a script to run" \
+                          --width=1280 \
+                          --height=800 \
                           --text="Choose a script from the list:" \
                           --column="Select" \
                           --column="Script Name" \
