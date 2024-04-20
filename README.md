@@ -7,7 +7,7 @@ Just `cd` to the Desktop on the deck, clone this repo, and chmod the directory.
 ```shell
 cd ~/Desktop
 git clone https://github.com/gunt3001/deckfiles.git
-find /path/to/directory -type f -name "*.sh" -exec chmod +x {} \; # Set executable bits
+find ./deckfiles -type f -name "*.sh" -exec chmod +x {} \; # Set executable bits
 ```
 
 Scripts will be located under `scripts/`.
