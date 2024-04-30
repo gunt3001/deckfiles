@@ -1,0 +1,51 @@
+[
+    {
+        "key": "GAMEPAD_BACK",
+        "command": [
+            "script-binding",
+            "browse-files"
+        ]
+    },
+    {
+        "key": "GAMEPAD_DPAD_UP",
+        "command": [
+            "script-binding",
+            "file_browser/dynamic/scroll_up"
+        ]
+    },
+    {
+        "key": "GAMEPAD_DPAD_DOWN",
+        "command": [
+            "script-binding",
+            "file_browser/dynamic/scroll_down"
+        ]
+    },
+    {
+        "key": "GAMEPAD_DPAD_LEFT",
+        "command": [
+            "script-binding",
+            "file_browser/dynamic/up_dir"
+        ]
+    },
+    {
+        "key": "GAMEPAD_DPAD_RIGHT",
+        "command": [
+            "script-binding",
+            "file_browser/dynamic/down_dir"
+        ]
+    },
+    {
+        "key": "GAMEPAD_ACTION_DOWN",
+        "command": [
+            "script-binding",
+            "file_browser/dynamic/play"
+        ]
+    },
+    {
+        "key": "GAMEPAD_ACTION_RIGHT",
+        "command": [
+            "script-binding",
+            "file_browser/dynamic/up_dir"
+        ]
+    }
+]
