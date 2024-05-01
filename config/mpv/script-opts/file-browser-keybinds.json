@@ -11,14 +11,40 @@
         "command": [
             "script-binding",
             "file_browser/dynamic/scroll_up"
-        ]
+        ],
+        "flags": {
+            "repeatable": true
+        }
     },
     {
         "key": "GAMEPAD_DPAD_DOWN",
         "command": [
             "script-binding",
             "file_browser/dynamic/scroll_down"
-        ]
+        ],
+        "flags": {
+            "repeatable": true
+        }
+    },
+    {
+        "key": "GAMEPAD_LEFT_SHOULDER",
+        "command": [
+            "script-binding",
+            "file_browser/dynamic/page_up"
+        ],
+        "flags": {
+            "repeatable": true
+        }
+    },
+    {
+        "key": "GAMEPAD_RIGHT_SHOULDER",
+        "command": [
+            "script-binding",
+            "file_browser/dynamic/page_down"
+        ],
+        "flags": {
+            "repeatable": true
+        }
     },
     {
         "key": "GAMEPAD_DPAD_LEFT",
