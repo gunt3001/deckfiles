@@ -15,15 +15,15 @@ mount_smb_share() {
 
     # Check if the share is already mounted
     if mountpoint -q "$mount_point"; then
-        echo "The share '$share' is already mounted at $mount_point."
+        echo "The share '$share' is already mounted at $mount_point. Unmounting first..."
+	umount "$mount_point"
+    fi
+    echo "Mounting the share '$share'..."
+    mount -t cifs "//${server}/${share}" "$mount_point" -o username="$username",password="$password",rw
+    if [ $? -eq 0 ]; then
+        echo "Mount of '$share' successful."
     else
-        echo "Mounting the share '$share'..."
-        mount -t cifs "//${server}/${share}" "$mount_point" -o username="$username",password="$password",rw
-        if [ $? -eq 0 ]; then
-            echo "Mount of '$share' successful."
-        else
-            echo "Failed to mount the share '$share'."
-        fi
+        echo "Failed to mount the share '$share'."
     fi
 }
 
