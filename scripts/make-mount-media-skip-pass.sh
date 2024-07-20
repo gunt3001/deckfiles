@@ -1,21 +1,30 @@
 #!/bin/bash
 
-# Path to the sudoers file
-SUDOERS_FILE="/etc/sudoers.d/deck-media-mount"
-TEMP_SUDOERS_FILE="/etc/sudoers.d/sudoers.tmp"
+# Define variables
+SUDOERS_FILE="/etc/sudoers.d/~10-deck-media-mount"
+BACKUP_FILE="/etc/sudoers.d/~10-deck-media-mount.bak"
+TEMP_SUDOERS_FILE="/tmp/temp_sudoers"
 
-# Backup the original sudoers file
-cp $SUDOERS_FILE "$SUDOERS_FILE.bak"
+# Step 1: Create a backup copy of the file
+cp $SUDOERS_FILE $BACKUP_FILE
 
-# Append the new rule to the temporary sudoers file
-echo 'your_username ALL=(ALL) NOPASSWD: /home/deck/Desktop/deckfiles/scripts/mount-media.sh' > $TEMP_SUDOERS_FILE
+# Step 2: Create a new temporary file with the desired content
+echo "your_username ALL=(ALL) NOPASSWD: /home/deck/Desktop/deckfiles/scripts/mount-media.sh" > $TEMP_SUDOERS_FILE
 
-# Check for syntax errors
+# Step 3: Run visudo to check the syntax of the temporary file
 visudo -c -f $TEMP_SUDOERS_FILE
+
+# Step 4: Check the result of visudo
 if [ $? -eq 0 ]; then
-    # If the syntax is OK, move the temporary file to the original
+    # If successful, move the temporary file to the sudoers directory and delete the backup file
     mv $TEMP_SUDOERS_FILE $SUDOERS_FILE
-    echo "Sudoers file updated successfully."
+    # Change the permission of the sudoers file to mode 0440
+    chmod 0440 $SUDOERS_FILE
+    # Delete the backup file
+    rm $BACKUP_FILE
+    echo "Success: sudoers file updated."
 else
-    echo "Error detected in sudoers file syntax. No changes were made."
+    # If failed, delete the temporary file and print a failure message
+    rm $TEMP_SUDOERS_FILE
+    echo "Failure: sudoers file not updated. Check the syntax and try again."
 fi
