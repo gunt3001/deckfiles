@@ -9,7 +9,7 @@ TEMP_SUDOERS_FILE="/tmp/temp_sudoers"
 cp $SUDOERS_FILE $BACKUP_FILE
 
 # Step 2: Create a new temporary file with the desired content
-echo "your_username ALL=(ALL) NOPASSWD: /home/deck/Desktop/deckfiles/scripts/mount-media.sh" > $TEMP_SUDOERS_FILE
+echo "deck ALL=(ALL) NOPASSWD: /home/deck/Desktop/deckfiles/scripts/mount-media.sh" > $TEMP_SUDOERS_FILE
 
 # Step 3: Run visudo to check the syntax of the temporary file
 visudo -c -f $TEMP_SUDOERS_FILE
