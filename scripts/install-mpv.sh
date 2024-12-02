@@ -12,13 +12,12 @@ SOURCE_DIR="/home/deck/Desktop/deckfiles/config/mpv"
 TARGET_DIR_CONFIG="$HOME/.var/app/io.mpv.Mpv/config/mpv"
 TARGET_CONFIG_FILE="$TARGET_DIR_CONFIG/mpv.conf"
 TARGET_INPUT_FILE="$TARGET_DIR_CONFIG/input.conf"
-TARGET_SCRIPTS_DIR="$TARGET_DIR_CONFIG/scripts"
-TARGET_SCRIPTOPTS_DIR="$TARGET_DIR_CONFIG/script-opts"
 
 # Symlink
 ln -s "$SOURCE_DIR/mpv.conf" "$TARGET_CONFIG_FILE"
 ln -s "$SOURCE_DIR/input.conf" "$TARGET_INPUT_FILE"
 ln -s "$SOURCE_DIR/scripts" "$TARGET_DIR_CONFIG"
 ln -s "$SOURCE_DIR/script-opts" "$TARGET_DIR_CONFIG"
+ln -s "$SOURCE_DIR/fonts" "$TARGET_DIR_CONFIG"
 
 echo "Symlink creation process completed."
