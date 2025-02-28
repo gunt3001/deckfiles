@@ -1,13 +1,23 @@
 #!/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
+set -e
+
 # Define the home directory path
 HOME_DIR="$HOME"
+REPO_DIR="$HOME_DIR/deck-tailscale"
 
 # Step 1: Clone the repository into the home directory
-echo "Cloning the Tailscale repository to your home directory..."
-cd $HOME_DIR
-git clone https://github.com/tailscale-dev/deck-tailscale.git
-cd deck-tailscale
+if [ -d "$REPO_DIR" ]; then
+    echo "Repository already exists. Pulling the latest changes..."
+    cd "$REPO_DIR"
+    git pull
+else
+    echo "Cloning the Tailscale repository to your home directory..."
+    cd "$HOME_DIR"
+    git clone https://github.com/tailscale-dev/deck-tailscale.git
+    cd deck-tailscale
+fi
 
 # Step 2: Run the installation script
 echo "Running the installation script..."
