@@ -68,10 +68,18 @@ mount_smb_share() {
     fi
 }
 
-# Server IP
-server="{enter server IP here}"
-samba_user="{replace_with_samba_user}"
-samba_pass="{replace_with_samba_pass}"
+# Read Samba credentials from a file
+credentials_file="smb.txt"
+
+if [ -f "$credentials_file" ]; then
+    source "$credentials_file"
+else
+    echo "Credentials file not found! Please create a file named 'smb.txt' with the following content:"
+    echo "server=\"{server IP}\""
+    echo "samba_user=\"{samba username}\""
+    echo "samba_pass=\"{samba password}\""
+    exit 1
+fi
 
 # Mount settings for Anime
 anime_share="Anime"
