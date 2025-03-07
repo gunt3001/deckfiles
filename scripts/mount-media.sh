@@ -10,7 +10,7 @@ fi
 # we modify the sudoers file.
 # This should persist across reboots and only need to be done once per SteamOS update.
 update_sudoers_file() {
-    local sudoers_file="/etc/sudoers.d/10-deck-media-mount"
+    local sudoers_file="/etc/sudoers.d/zz-deck-media-mount"
     local temp_sudoers_file="/tmp/temp_sudoers"
 
     # Check if the sudoers file already exists
