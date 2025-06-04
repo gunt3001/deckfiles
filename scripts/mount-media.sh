@@ -57,7 +57,7 @@ mount_smb_share() {
     # Check if the share is already mounted
     if mountpoint -q "$mount_point"; then
         echo "The share '$share' is already mounted at $mount_point. Unmounting first..."
-	umount "$mount_point"
+	umount -f "$mount_point"
     fi
     echo "Mounting the share '$share'..."
     mount -t cifs "//${server}/${share}" "$mount_point" -o username="$username",password="$password",rw
