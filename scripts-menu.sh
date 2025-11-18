@@ -1,40 +1,48 @@
 #!/bin/bash
 
 # Define the directory containing the scripts
-script_dir=~/Desktop/deckfiles/scripts/
+script_dir="$HOME/Desktop/deckfiles/scripts"
 
 # Check if the directory exists
 if [ ! -d "$script_dir" ]; then
-    zenity --error --text="The directory $script_dir does not exist."
+    whiptail --title "Error" \
+             --msgbox "The directory $script_dir does not exist." 8 60
     exit 1
 fi
 
-# Generate the list of files for the Zenity radio list
-file_list=()
-cd "$script_dir"
+cd "$script_dir" || exit 1
+
+# Generate the list of files for the whiptail radiolist
+options=()
 for script in *.sh; do
     if [ -f "$script" ]; then
-        file_list+=("FALSE")
-        file_list+=("$script")
-        file_list+=("$script") # Description same as filename
+        # tag, item, status(ON/OFF)
+        options+=("$script" "$script" "OFF")
     fi
 done
 
-# Display the Zenity dialog and capture the selection
-selected_script=$(zenity --list --radiolist \
-                          --title="Select a script to run" \
-                          --width=1280 \
-                          --height=800 \
-                          --text="Choose a script from the list:" \
-                          --column="Select" \
-                          --column="Script Name" \
-                          --column="Description" \
-                          "${file_list[@]}")
+# Check if we actually found any scripts
+if [ ${#options[@]} -eq 0 ]; then
+    whiptail --title "Info" \
+             --msgbox "No .sh scripts were found in $script_dir." 8 60
+    exit 0
+fi
 
-# Check if a script was selected
-if [ -n "$selected_script" ]; then
+# Display the whiptail dialog and capture the selection
+selected_script=$(
+    whiptail --title "Select a script to run" \
+             --radiolist "Choose a script from the list:" \
+             20 78 10 \
+             "${options[@]}" \
+             3>&1 1>&2 2>&3
+)
+exit_status=$?
+
+# If user pressed OK and a script was selected
+if [ $exit_status -eq 0 ] && [ -n "$selected_script" ]; then
     # Execute the selected script using Konsole
-    konsole --noclose -e "$script_dir$selected_script"
+    konsole --noclose -e "$script_dir/$selected_script"
 else
-    zenity --info --text="No script was selected."
+    whiptail --title "Info" \
+             --msgbox "No script was selected." 8 40
 fi
