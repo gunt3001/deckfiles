@@ -33,7 +33,8 @@ selected_script=$(
     whiptail --title "Select a script to run" \
              --menu "Choose a script from the list:" \
              20 78 10 \
-             "${options[@]}"
+             "${options[@]}" \
+             3>&1 1>&2 2>&3
 )
 exit_status=$?
 
@@ -41,7 +42,7 @@ exit_status=$?
 if [ $exit_status -eq 0 ] && [ -n "$selected_script" ]; then
     # Run the selected script in the current terminal session
     "$script_dir/$selected_script"
-
+    
     # Wait for user to press Enter before closing the terminal
     echo ""
     read -rp "Press Enter to close..."
