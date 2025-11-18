@@ -40,8 +40,8 @@ exit_status=$?
 
 # If user pressed OK and a script was selected
 if [ $exit_status -eq 0 ] && [ -n "$selected_script" ]; then
-    # Execute the selected script using Konsole
-    konsole --noclose -e "$script_dir/$selected_script"
+    # Run the selected script in the current terminal session
+    "$script_dir/$selected_script"
 else
     whiptail --title "Info" \
              --msgbox "No script was selected." 8 40
