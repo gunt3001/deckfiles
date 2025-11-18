@@ -42,6 +42,10 @@ exit_status=$?
 if [ $exit_status -eq 0 ] && [ -n "$selected_script" ]; then
     # Run the selected script in the current terminal session
     "$script_dir/$selected_script"
+    
+    # Wait for user to press Enter before closing the terminal
+    echo ""
+    read -rp "Press Enter to close..."
 else
     whiptail --title "Info" \
              --msgbox "No script was selected." 8 40
