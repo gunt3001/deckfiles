@@ -12,12 +12,12 @@ fi
 
 cd "$script_dir" || exit 1
 
-# Generate the list of files for the whiptail radiolist
+# Generate the list of files for the whiptail menu
 options=()
 for script in *.sh; do
     if [ -f "$script" ]; then
-        # tag, item, status(ON/OFF)
-        options+=("$script" "$script" "OFF")
+        # tag, item
+        options+=("$script" "$script")
     fi
 done
 
@@ -28,10 +28,10 @@ if [ ${#options[@]} -eq 0 ]; then
     exit 0
 fi
 
-# Display the whiptail dialog and capture the selection
+# Display the whiptail menu and capture the selection
 selected_script=$(
     whiptail --title "Select a script to run" \
-             --radiolist "Choose a script from the list:" \
+             --menu "Choose a script from the list:" \
              20 78 10 \
              "${options[@]}" \
              3>&1 1>&2 2>&3
