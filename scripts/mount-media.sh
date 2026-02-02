@@ -60,7 +60,7 @@ mount_smb_share() {
 	umount -f "$mount_point"
     fi
     echo "Mounting the share '$share'..."
-    mount -t cifs "//${server}/${share}" "$mount_point" -o username="$username",password="$password",vers=3.0,soft,ro
+    mount -t cifs "//${server}/${share}" "$mount_point" -o username="$username",password="$password",vers=3.1.1,ro,soft,multichannel,serverino,cache=none,actimeo=1,echo_interval=5,_netdev
     if [ $? -eq 0 ]; then
         echo "Mount of '$share' successful."
     else
